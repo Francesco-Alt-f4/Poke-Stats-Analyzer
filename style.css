@@ -1,0 +1,177 @@
+/* SEZIONE VARIABILI (:root)
+   Definisce i colori principali riutilizzabili in tutto il foglio di stile. 
+   Permette di cambiare un colore in un solo punto per aggiornare l'intera grafica.
+*/
+:root {
+    --pokedex-red: #dc0a2d;   /* Il rosso classico del Pokédex */
+    --screen-bg: #555;        /* Grigio scuro per il bordo dello schermo */
+    --gb-green: #9bccaa;      /* Verde chiaro stile Game Boy per il display */
+    --win-green: #2ecc71;     /* Verde brillante per evidenziare le statistiche vincenti */
+}
+
+/* STILE GENERALE DEL CORPO PAGINA
+   Gestisce lo sfondo esterno alla console e il font.
+*/
+body {
+    background-color: #222;                  /* Sfondo grigio quasi nero */
+    color: #fff;                             /* Testo bianco di base */
+    font-family: 'Press Start 2P', cursive;  /* Font pixelato */
+    font-size: 10px;                         /* Dimensione testo molto piccola stile retro */
+    display: flex;                           /* Centra la console orizzontalmente */
+    justify-content: center;
+    padding: 20px;
+}
+
+/* IL GUSCIO DEL POKÉDEX
+   La cornice rossa esterna con l'effetto di profondità (bordo scuro in basso).
+*/
+.pokedex-frame {
+    width: 1000px;
+    background: var(--pokedex-red);
+    padding: 25px;
+    border-radius: 20px;
+    border-bottom: 12px solid #8b0000;      /* Crea un effetto 3D sul fondo */
+}
+
+/* L'AREA DELLO SCHERMO
+   Il rettangolo grigio scuro che contiene i display dei Pokémon.
+*/
+.battle-arena {
+    display: flex;                          /* Dispone slot e pannello evoluzioni affiancati */
+    background: var(--screen-bg);
+    padding: 15px;
+    border: 5px solid #333;                 /* Cornice interna dello schermo */
+    gap: 15px;                              /* Spazio tra i componenti interni */
+}
+
+/* CONTENITORE DEGLI SLOT DI SINISTRA
+   Occupa circa il 65% dello spazio totale dello schermo.
+*/
+.slots-container {
+    flex: 0 0 65%;
+    display: flex;
+    gap: 10px;
+    position: relative;                     /* Necessario per posizionare il badge "VS" al centro */
+}
+
+/* Singolo slot (Pokémon 1 o Pokémon 2) */
+.slot { 
+    flex: 1; 
+    display: flex; 
+    flex-direction: column; 
+}
+
+/* IL DISPLAY DEL POKÉMON (Verde Game Boy)
+   Qui vengono mostrati i dati dinamici.
+*/
+.poke-display {
+    min-height: 420px;
+    background: var(--gb-green);
+    border: 4px solid #333;
+    padding: 10px;
+    margin-top: 10px;
+    color: #111;                            /* Testo scuro per contrasto sul verde */
+    text-align: center;
+}
+
+/* GESTIONE IMMAGINE POKÉMON
+   Blocca la dimensione per evitare che artwork troppo grandi rompano il layout.
+*/
+.poke-img {
+    width: 90px;
+    height: 90px;
+    object-fit: contain;                    /* Mantiene le proporzioni senza tagliare l'immagine */
+    margin-bottom: 10px;
+}
+
+.poke-name { font-size: 10px; margin: 5px 0; }
+.habitat { font-size: 7px; margin-bottom: 8px; color: #444; }
+
+/* GRIGLIA DELLE STATISTICHE
+   Allinea Nome Stat, Barra e Valore numerico su una riga.
+*/
+.stat-group {
+    display: grid;
+    grid-template-columns: 45px 1fr 25px;   /* Larghezze fisse per etichette e numeri, flessibile per la barra */
+    align-items: center;
+    gap: 5px;
+    margin-bottom: 4px;
+}
+
+/* Sfondo della barra (nero/grigio scuro) */
+.bar-bg { height: 6px; background: #333; border-radius: 3px; }
+
+/* La parte colorata della barra (gialla di default) */
+.bar-fill { 
+    height: 100%; 
+    background: #f1c40f; 
+    transition: 0.3s;                       /* Animazione fluida quando cambia il valore */
+}
+
+/* LOGICA VINCITORE
+   Applica questi stili quando il JavaScript aggiunge la classe .winner.
+*/
+.stat-group.winner .bar-fill { 
+    background: var(--win-green) !important;/* Sovrascrive il giallo con il verde */
+    box-shadow: 0 0 5px var(--win-green);   /* Effetto "neon" luminoso */
+}
+.stat-group.winner .stat-val { 
+    color: #006400;                         /* Numero in verde scuro per risaltare */
+    font-weight: bold; 
+}
+
+/* SEZIONE MOSSE
+   Area in basso nel display dedicata alle abilità del Pokémon.
+*/
+.moves-container {
+    margin-top: 10px;
+    border-top: 1px solid #555;
+    padding-top: 8px;
+    text-align: left;
+}
+.moves-title { font-size: 7px; font-weight: bold; margin-bottom: 5px; }
+
+/* Griglia per disporre le mosse su due colonne */
+.moves-list {
+    list-style: none;                       /* Rimuove i pallini della lista */
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3px;
+}
+.moves-list li {
+    font-size: 6px;
+    background: rgba(0,0,0,0.05);           /* Sfondo leggerissimo per ogni mossa */
+    padding: 3px;
+    border-radius: 2px;
+}
+
+/* PANNELLO DELLE EVOLUZIONI (A destra)
+   Mostra la catena evolutiva caricata.
+*/
+.evolution-chain-panel {
+    flex: 1;                                /* Occupa lo spazio rimanente a destra */
+    background: rgba(0,0,0,0.2);            /* Sfondo semi-trasparente scuro */
+    border: 4px solid #333;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.evo-stage { display: flex; align-items: center; gap: 5px; margin: 5px 0; }
+.evo-img { width: 40px; height: 40px; }
+.evo-name { font-size: 7px; text-transform: uppercase; }
+.evo-arrow { color: #f1c40f; font-size: 10px; }
+
+/* BADGE "VS"
+   Posizionato esattamente al centro tra i due Pokémon.
+*/
+.vs-badge { 
+    position: absolute; 
+    left: 50%; 
+    top: 50%; 
+    transform: translate(-50%, -50%);       /* Centratura perfetta rispetto al punto di origine */
+    color: white; 
+    text-shadow: 2px 2px #000;              /* Ombra per migliorarne la leggibilità */
+}

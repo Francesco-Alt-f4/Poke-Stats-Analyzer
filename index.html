@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Poké-Battle Stats Lab</title>
+    
+    <link rel="stylesheet" href="style.css">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="pokedex-frame">
+        
+        <header>
+            <h1>POKÉ-STATS ANALYZER</h1>
+            
+            <div class="led-container">
+                <div class="led blue"></div>
+                <div class="led red"></div>
+                <div class="led yellow"></div>
+                <div class="led green"></div>
+            </div>
+        </header>
+
+        <main class="battle-arena">
+            
+            <div class="slots-container">
+                
+                <div class="slot" id="poke-1">
+                    <div class="search-bar">
+                        <input type="text" id="input-1" placeholder="Nome/ID...">
+                        <button onclick="analyzePokemon(1)">SCAN</button>
+                    </div>
+                    <div id="result-1" class="poke-display">
+                        </div>
+                </div>
+
+                <div class="vs-badge">VS</div>
+
+                <div class="slot" id="poke-2">
+                    <div class="search-bar">
+                        <input type="text" id="input-2" placeholder="Nome/ID...">
+                        <button onclick="analyzePokemon(2)">SCAN</button>
+                    </div>
+                    <div id="result-2" class="poke-display">
+                        </div>
+                </div>
+            </div>
+
+            <div class="evolution-chain-panel">
+                <h3 class="pixel-text">EVOLUTION CHAIN</h3>
+                <div id="evolution-display" class="evolution-display">
+                    <p class="placeholder-text-evol">Scansiona un Pokémon per vedere la sua storia</p>
+                </div>
+            </div>
+
+        </main>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
